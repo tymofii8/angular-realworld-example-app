@@ -1,23 +1,21 @@
 pipeline {
-  agent {
-    kubernetes {
-      label 'app'
-      defaultContainer 'jnlp'
-      yaml """
-          apiVersion: v1
-          kind: Pod
-          metadata:
-            labels:
-              component: ci
-          spec:
-            serviceAccount: jenkins
-            containers:
-              - name: node
-                image: signiant/docker-jenkins-nodejs  
-                command:
-                  - cat
-                tty: true
-        """
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
     }
-  }
 }
