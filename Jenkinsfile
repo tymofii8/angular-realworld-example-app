@@ -40,13 +40,15 @@ spec:
     stages {
         stage('git clone') {
             steps {
-                git 'https://github.com/tymofii8/angular-realworld-example-app.git'
+                
             }
         }
         stage('docker build') { 
             steps {
               container ('dind'){
                 script {
+                    git 'https://github.com/tymofii8/angular-realworld-example-app.git'
+                    ls -la
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                     docker.withRegistry( '', registryCredential ) {
                         dockerImage.push()
