@@ -43,11 +43,13 @@ spec:
                 git 'https://github.com/tymofii8/angular-realworld-example-app.git'
             }
         }
-        stage('docker build') {
-            steps {
+        stage('docker build') { 
+          steps {
+            container ('dind'){
                 script {
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 }
+              }
             }
         }
         stage('docker push') {
