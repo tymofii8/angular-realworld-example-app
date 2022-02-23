@@ -21,14 +21,6 @@ spec:
       - --storage-driver=overlay
     securityContext:
       privileged: true
-//   - name: helm
-//     image: alpine/helm:3.8.0
-//     tty: true
-//     command:
-//     - /bin/cat
-//     securityContext:
-//       privileged: true
-
 """
     }
   }
