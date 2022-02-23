@@ -38,11 +38,6 @@ spec:
         dockerImage = '' 
     }
     stages {
-        stage('git clone') {
-            steps {
-                
-            }
-        }
         stage('docker build') { 
             steps {
               container ('dind'){
