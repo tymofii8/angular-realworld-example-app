@@ -44,27 +44,16 @@ spec:
             }
         }
         stage('docker build') { 
-          steps {
-            container ('dind'){
+            steps {
+              container ('dind'){
                 script {
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                }
-              }
-            }
-        }
-        stage('docker push') {
-            steps {
-                script {
                     docker.withRegistry( '', registryCredential ) {
                         dockerImage.push()
                     }
-                }
+                 }
+              }
             }
-        }
-        stage('clean up') {
-            steps {
-                sh "docker rmi $registry:$BUILD_NUMBER"
-            }
-        }
+         }
     }
 }
