@@ -1,0 +1,59 @@
+// def BUILD_NUMBER
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent any
+    stages {
+        stage("docker login") {
+            steps {
+                echo "-----docker hub login-----"
+                withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh 'docker login -u $USERNAME -p $PASSWORD'
+                }
+            }
+        }
+        
+        stage("create docker image") {
+            steps {
+                // script{
+                //     BUILD_NUMBER = 123
+                // }
+                // sh "echo ${BUILD_NUMBER}"
+                // sh "echo \${BUILD_NUMBER}"
+                sh 'echo ${BUILD_NUMBER}'
+                echo "-----building image-----"
+                dir ('') {
+                	sh 'docker build -t timofii/angular-app:v${BUILD_NUMBER} . '
+                  // sh "docker tag nyamtsu/react:v${BUILD_NUMBER} nyamtsu/react:latest"
+                }
+            }
+        }
+        
+        stage("docker push") {
+            steps {
+                echo "-----pushing image-----"
+                    sh 'docker push timofii/angular-app:v${BUILD_NUMBER}'  
+            }
+        }
+        
+        // stage('helm upgrade') {
+        //     steps {
+        //         echo "-----update deployment-----"
+        //             withKubeConfig(credentialsId: 'kuber', serverUrl: '') {
+                    
+        //             sh '''
+        //                 cd k8s-helm
+        //                 helm upgrade --install default --set container.frontendImage=timofii/angular-app:v${BUILD_NUMBER} ./
+        //             '''
+        //         }
+        //     }
+        // }
+        
+        //         stage('delete docker image localy') {
+        //     steps {
+        //         echo "-----delete docker image localy-----"
+        //             sh 'docker rmi timofii/angular-app:v${BUILD_NUMBER}'
+        //     }
+        // }
+    }
+}
