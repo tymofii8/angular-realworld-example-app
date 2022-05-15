@@ -41,7 +41,6 @@ pipeline {
 //                     }
                     echo "-----pushing image-----"
 //                         sh 'docker push timofii/angular-app:jnkns'
-                    tail -f /dev/null
                 }
             }
         }
