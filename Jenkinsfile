@@ -35,9 +35,9 @@ pipeline {
             steps {
                 container('dind') {
                     echo "-----docker hub login-----"
-                    withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        sh 'docker login -u $USERNAME -p $PASSWORD'
-                    }
+//                     withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+//                         sh 'docker login -u $USERNAME -p $PASSWORD'
+//                     }
                     sh 'echo ${BUILD_NUMBER}'
                     echo "-----building image-----"
                     dir ('') {
