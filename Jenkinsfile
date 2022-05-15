@@ -28,13 +28,13 @@ pipeline {
     stages {
         stage('Build_and_push') {
             steps {
-                container('dind') {
+                container('ubuntu') {
                     echo "-----docker hub login-----"
 //                     withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
 //                         docker login -u $USERNAME -p $PASSWORD
 //                     }
 //                     sh 'echo ${BUILD_NUMBER}'
-                    date
+                    sh 'echo blahblah'
                     echo "-----building image-----"
 //                     dir ('') {
 //                         sh 'docker build -t timofii/angular-app:jnkns . '
