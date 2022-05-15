@@ -28,13 +28,6 @@ spec:
     - /bin/cat
     securityContext:
       privileged: true
-//   - name: sonar
-//     image: sonarsource/sonar-scanner-cli:latest
-//     tty: true
-//     command:
-//     - /bin/cat
-//     securityContext:
-//       privileged: true
 """
         }
     }
