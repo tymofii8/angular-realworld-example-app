@@ -13,11 +13,6 @@ pipeline {
                 - name: dind
                   image: docker:dind
                   imagePullPolicy: Always
-                  command:
-                  - dockerd
-                  - --host=unix:///var/run/docker.sock
-                  - --host=tcp://0.0.0.0:2375
-                  - --storage-driver=overlay
                   securityContext:
                   privileged: true
                 - name: helm
@@ -39,7 +34,7 @@ pipeline {
 //                         sh 'docker login -u $USERNAME -p $PASSWORD'
 //                     }
 //                     sh 'echo ${BUILD_NUMBER}'
-                    /bin/sh 'echo blahblah'
+                    sh 'echo blahblah'
                     echo "-----building image-----"
 //                     dir ('') {
 //                         sh 'docker build -t timofii/angular-app:jnkns . '
