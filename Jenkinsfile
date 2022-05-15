@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes {
-            yaml """
+            yaml '''
                 spec:
                 containers:
                 - name: jnlp
@@ -27,11 +27,11 @@ pipeline {
                     - /bin/cat
                     securityContext:
                     privileged: true
-                """
+                '''
         }
     }
     stages {
-        stage('Build') {
+        stage('Build_and_push') {
             steps {
                 container('dind') {
                     echo "-----docker hub login-----"
