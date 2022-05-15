@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes {
-            label 'front-${UUID.randomUUID().toString()}'
+            label 'cart-service-api-${UUID.randomUUID().toString()}'
             yaml """
 spec:
   containers:
@@ -21,28 +21,41 @@ spec:
       - --storage-driver=overlay
     securityContext:
       privileged: true
+  - name: helm
+    image: alpine/helm:3.3.3
+    tty: true
+    command:
+    - /bin/cat
+    securityContext:
+      privileged: true
+//   - name: sonar
+//     image: sonarsource/sonar-scanner-cli:latest
+//     tty: true
+//     command:
+//     - /bin/cat
+//     securityContext:
+//       privileged: true
 """
-    }
-  }
-    environment { 
-        registry = "timofii/front" 
-        registryCredential = 'dockerhub_id' 
-        dockerImage = '' 
+        }
     }
     stages {
-        stage('docker build') { 
-            steps {
-              container ('dind'){
-                script {
-                    git 'https://github.com/tymofii8/angular-realworld-example-app.git'
-                    ls -la
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                    docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()
-                    }
-                 }
-              }
+        stage('Build') {
+            agent {
+                dind { image 'docker:dind' }
             }
-         }
+            steps {
+                echo "-----docker hub login-----"
+                withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh 'docker login -u $USERNAME -p $PASSWORD'
+                }
+                sh 'echo ${BUILD_NUMBER}'
+                echo "-----building image-----"
+                dir ('') {
+                	sh 'docker build -t timofii/angular-app:v${BUILD_NUMBER} . '
+                }
+                echo "-----pushing image-----"
+                    sh 'docker push timofii/angular-app:v${BUILD_NUMBER}'
+            }
+        }
     }
 }
