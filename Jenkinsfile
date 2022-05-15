@@ -41,10 +41,10 @@ pipeline {
 //                     sh 'echo ${BUILD_NUMBER}'
                     echo "-----building image-----"
                     dir ('') {
-                        sh 'docker build -t timofii/angular-app:v${BUILD_NUMBER} . '
+                        sh 'docker build -t timofii/angular-app:jnkns . '
                     }
                     echo "-----pushing image-----"
-                        sh 'docker push timofii/angular-app:v${BUILD_NUMBER}'
+                        sh 'docker push timofii/angular-app:jnkns'
                 }
             }
         }
