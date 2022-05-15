@@ -30,11 +30,10 @@ pipeline {
             steps {
                 container('dind') {
                     echo "-----docker hub login-----"
-//                     withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-//                         sh 'docker login -u $USERNAME -p $PASSWORD'
-//                     }
-//                     sh 'echo ${BUILD_NUMBER}'
-                    sh 'echo blahblah'
+                    withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        docker login -u $USERNAME -p $PASSWORD
+                    }
+                    sh 'echo ${BUILD_NUMBER}'
                     echo "-----building image-----"
 //                     dir ('') {
 //                         sh 'docker build -t timofii/angular-app:jnkns . '
