@@ -7,7 +7,7 @@ pipeline {
                 - name: jnlp
                   image: jenkins/jnlp-slave
                   imagePullPolicy: IfNotPresent
-                  tty: true
+                  tty: false
                   securityContext:
                   privileged: true
                 - name: dind
@@ -35,10 +35,9 @@ pipeline {
             steps {
                 container('dind') {
                     echo "-----docker hub login-----"
-//                     sh 'set +e'
-//                     withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-//                         sh 'docker login -u $USERNAME -p $PASSWORD'
-//                     }
+                    withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        sh 'docker login -u $USERNAME -p $PASSWORD'
+                    }
 //                     sh 'echo ${BUILD_NUMBER}'
                     echo "-----building image-----"
 //                     dir ('') {
