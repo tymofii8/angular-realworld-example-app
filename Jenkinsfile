@@ -28,7 +28,7 @@ pipeline {
     stages {
         stage('Build_and_push') {
             steps {
-                container('ubuntu') {
+                container('debian') {
                     echo "-----docker hub login-----"
 //                     withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
 //                         docker login -u $USERNAME -p $PASSWORD
