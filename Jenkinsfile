@@ -5,7 +5,7 @@ pipeline {
                 spec:
                 containers:
                 - name: jnlp
-                    image: jenkins/jnlp-slave:4.3-9
+                    image: jenkins/jnlp-slave
                     imagePullPolicy: IfNotPresent
                     tty: true
                     securityContext:
@@ -21,7 +21,7 @@ pipeline {
                     securityContext:
                     privileged: true
                 - name: helm
-                    image: alpine/helm:3.3.3
+                    image: alpine/helm
                     tty: true
                     command:
                     - /bin/cat
