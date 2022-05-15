@@ -35,6 +35,7 @@ pipeline {
             steps {
                 container('dind') {
                     echo "-----docker hub login-----"
+                    sh 'set+e'
                     withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh 'docker login -u $USERNAME -p $PASSWORD'
                     }
