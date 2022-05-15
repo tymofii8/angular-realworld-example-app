@@ -35,17 +35,17 @@ pipeline {
             steps {
                 container('dind') {
                     echo "-----docker hub login-----"
-                    sh 'set +e'
-                    withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        sh 'docker login -u $USERNAME -p $PASSWORD'
-                    }
+//                     sh 'set +e'
+//                     withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+//                         sh 'docker login -u $USERNAME -p $PASSWORD'
+//                     }
 //                     sh 'echo ${BUILD_NUMBER}'
                     echo "-----building image-----"
-                    dir ('') {
-                        sh 'docker build -t timofii/angular-app:jnkns . '
-                    }
+//                     dir ('') {
+//                         sh 'docker build -t timofii/angular-app:jnkns . '
+//                     }
                     echo "-----pushing image-----"
-                        sh 'docker push timofii/angular-app:jnkns'
+//                         sh 'docker push timofii/angular-app:jnkns'
                 }
             }
         }
