@@ -34,7 +34,7 @@ pipeline {
 //                         sh 'docker login -u $USERNAME -p $PASSWORD'
 //                     }
 //                     sh 'echo ${BUILD_NUMBER}'
-//                     sh 'echo blahblah'
+                    sh 'echo blahblah'
                     echo "-----building image-----"
 //                     dir ('') {
 //                         sh 'docker build -t timofii/angular-app:jnkns . '
