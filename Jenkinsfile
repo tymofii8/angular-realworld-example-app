@@ -10,8 +10,8 @@ pipeline {
                   tty: true
                   securityContext:
                   privileged: true
-                - name: dind
-                  image: docker:dind
+                - name: debian
+                  image: debian
                   imagePullPolicy: Always
                   securityContext:
                   privileged: true
