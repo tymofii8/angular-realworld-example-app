@@ -5,28 +5,28 @@ pipeline {
                 spec:
                 containers:
                 - name: jnlp
-                    image: jenkins/jnlp-slave
-                    imagePullPolicy: IfNotPresent
-                    tty: true
-                    securityContext:
-                    privileged: true
+                  image: jenkins/jnlp-slave
+                  imagePullPolicy: IfNotPresent
+                  tty: true
+                  securityContext:
+                  privileged: true
                 - name: dind
-                    image: docker:dind
-                    imagePullPolicy: Always
-                    command:
-                    - dockerd
-                    - --host=unix:///var/run/docker.sock
-                    - --host=tcp://0.0.0.0:2375
-                    - --storage-driver=overlay
-                    securityContext:
-                    privileged: true
+                  image: docker:dind
+                  imagePullPolicy: Always
+                  command:
+                  - dockerd
+                  - --host=unix:///var/run/docker.sock
+                  - --host=tcp://0.0.0.0:2375
+                  - --storage-driver=overlay
+                  securityContext:
+                  privileged: true
                 - name: helm
-                    image: alpine/helm
-                    tty: true
-                    command:
-                    - /bin/cat
-                    securityContext:
-                    privileged: true
+                  image: alpine/helm
+                  tty: true
+                  command:
+                  - /bin/cat
+                  securityContext:
+                  privileged: true
                 '''
         }
     }
