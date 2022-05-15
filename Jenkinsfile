@@ -40,9 +40,9 @@ spec:
     }
     stages {
         stage('Build') {
-            agent {
-                dind { image 'docker:dind' }
-            }
+//             agent {
+//                 dind { image 'docker:dind' }
+//             }
             steps {
                 echo "-----docker hub login-----"
                 withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
