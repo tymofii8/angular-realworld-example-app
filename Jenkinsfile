@@ -3,26 +3,27 @@ pipeline {
         kubernetes {
             yaml '''
                 spec:
-                containers:
-                - name: jnlp
-                  image: jenkins/jnlp-slave
-                  imagePullPolicy: IfNotPresent
-                  tty: true
-                  securityContext:
-                  privileged: true
-                - name: debian
-                  image: debian
-                  imagePullPolicy: Always
-                  securityContext:
-                  privileged: true
-                - name: helm
-                  image: alpine/helm
-                  tty: true
-                  command:
-                  - /bin/cat
-                  securityContext:
-                  privileged: true
-                '''
+                  serviceAccountName: jenkins
+                  containers:
+                  - name: jnlp
+                    image: jenkins/jnlp-slave
+                    imagePullPolicy: IfNotPresent
+                    tty: true
+                    securityContext:
+                    privileged: true
+                  - name: debian
+                    image: debian
+                    imagePullPolicy: Always
+                    securityContext:
+                    privileged: true
+                  - name: helm
+                    image: alpine/helm
+                    tty: true
+                    command:
+                    - /bin/cat
+                    securityContext:
+                    privileged: true
+                  '''
         }
     }
     stages {
