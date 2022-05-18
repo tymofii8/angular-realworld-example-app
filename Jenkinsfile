@@ -31,7 +31,6 @@ pipeline {
           steps {
              step {
                  container('dind') {
-                   step {
                     echo "-----docker hub login-----"
                     withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) docker login -u $USERNAME -p $PASSWORD
                     sh 'echo ${BUILD_NUMBER}'
@@ -42,7 +41,6 @@ pipeline {
                     }
                     echo "-----pushing image-----"
                         sh 'docker push timofii/angular-app:jnkns'
-                   }
                  }
               }
            }
