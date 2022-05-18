@@ -39,7 +39,7 @@ pipeline {
         // stage('helm upgrade') {
         //     steps {
         //         echo "-----update deployment-----"
-        //             withKubeConfig(credentialsId: 'kuber', serverUrl: '') {
+        //             withKubeConfig(credentialsId: 'kubecfg', serverUrl: '') {
                     
         //             sh '''
         //                 cd k8s-helm
