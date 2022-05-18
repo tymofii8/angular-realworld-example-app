@@ -29,7 +29,7 @@ pipeline {
     stages {
         stage('Build_and_push') {
             container('dind') {
-              steps {
+              stage {
                     echo "-----docker hub login-----"
                     withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     docker login -u $USERNAME -p $PASSWORD
