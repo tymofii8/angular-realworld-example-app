@@ -3,6 +3,7 @@ pipeline {
         kubernetes {
             label 'mynode'
         }
+    }
 //     agent {
 //         kubernetes {
 //             yaml '''
