@@ -11,8 +11,8 @@ pipeline {
                     tty: true
                     securityContext:
                     privileged: true
-                  - name: debian
-                    image: debian
+                  - name: dind
+                    image: dind
                     imagePullPolicy: Always
                     securityContext:
                     privileged: true
@@ -29,7 +29,7 @@ pipeline {
     stages {
         stage('Build_and_push') {
             steps {
-                container('debian') {
+                container('dind') {
                     echo "-----docker hub login-----"
                     withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         docker login -u $USERNAME -p $PASSWORD
