@@ -28,8 +28,9 @@ pipeline {
     }
     stages {
         stage('Build_and_push') {
-            container('dind') {
-              stage {
+          steps {
+             step {
+                 container('dind') {
                     echo "-----docker hub login-----"
                     withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     docker login -u $USERNAME -p $PASSWORD
@@ -42,8 +43,9 @@ pipeline {
                     }
                     echo "-----pushing image-----"
                         sh 'docker push timofii/angular-app:jnkns'
-               }
-            }
+                 }
+              }
+           }
         }
     }
 }
