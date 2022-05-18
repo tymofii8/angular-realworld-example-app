@@ -1,6 +1,6 @@
 pipeline {
     agent {
-            label 'mynode'
+          label 'Built-In Node'
           }
 //     agent {
 //         kubernetes {
