@@ -28,11 +28,11 @@ pipeline {
     }
     stages {
         stage('Build_and_push') {
-            steps {
-                container('dind') {
+            container('dind') {
+              steps {
                     echo "-----docker hub login-----"
                     withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        docker login -u $USERNAME -p $PASSWORD
+                    docker login -u $USERNAME -p $PASSWORD
                     }
                     sh 'echo ${BUILD_NUMBER}'
                     sh 'echo blahblah'
