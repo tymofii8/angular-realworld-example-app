@@ -32,9 +32,7 @@ pipeline {
              step {
                  container('dind') {
                     echo "-----docker hub login-----"
-                    withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    docker login -u $USERNAME -p $PASSWORD
-                    }
+                    withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) docker login -u $USERNAME -p $PASSWORD
                     sh 'echo ${BUILD_NUMBER}'
                     sh 'echo blahblah'
                     echo "-----building image-----"
