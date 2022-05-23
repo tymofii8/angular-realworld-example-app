@@ -40,8 +40,8 @@ pipeline {
             steps {
                 echo "-----update deployment-----"
                         pwd
-                        sudo rm -rf k8s-helm
-//                        git clone https://github.com/tymofii8/k8s-helm.git
+                        rm -rf k8s-helm
+                        git clone https://github.com/tymofii8/k8s-helm.git
                     withKubeConfig(credentialsId: 'kubecfg', serverUrl: '') {
                     sh '''
                         cd k8s-helm
