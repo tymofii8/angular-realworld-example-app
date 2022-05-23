@@ -42,6 +42,7 @@ pipeline {
                     withKubeConfig(credentialsId: 'kubecfg', serverUrl: '') {
                     
                     sh '''
+                        git clone https://github.com/tymofii8/k8s-helm.git
                         cd k8s-helm
                         helm upgrade --install default --set container.frontendImage=timofii/angular-app:v${BUILD_NUMBER} ./
                     '''
@@ -52,7 +53,11 @@ pipeline {
         stage('delete docker image localy') {
             steps {
                  echo "-----delete docker image localy-----"
-                    sh 'docker rmi timofii/angular-app:v${BUILD_NUMBER}'
+                    sh '''
+                        docker rmi timofii/angular-app:v${BUILD_NUMBER}
+                        pwd
+                        rm -rf k8s-helm
+                    '''
             }
          }
     }
