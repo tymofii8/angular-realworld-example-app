@@ -36,24 +36,24 @@ pipeline {
             }
         }
         
-        // stage('helm upgrade') {
-        //     steps {
-        //         echo "-----update deployment-----"
-        //             withKubeConfig(credentialsId: 'kubecfg', serverUrl: '') {
+        stage('helm upgrade') {
+            steps {
+                echo "-----update deployment-----"
+                    withKubeConfig(credentialsId: 'kubecfg', serverUrl: '') {
                     
-        //             sh '''
-        //                 cd k8s-helm
-        //                 helm upgrade --install default --set container.frontendImage=timofii/angular-app:v${BUILD_NUMBER} ./
-        //             '''
-        //         }
-        //     }
-        // }
+                    sh '''
+                        cd k8s-helm
+                        helm upgrade --install default --set container.frontendImage=timofii/angular-app:v${BUILD_NUMBER} ./
+                    '''
+                    }
+            }
+        }
         
-        //         stage('delete docker image localy') {
-        //     steps {
-        //         echo "-----delete docker image localy-----"
-        //             sh 'docker rmi timofii/angular-app:v${BUILD_NUMBER}'
-        //     }
-        // }
+        stage('delete docker image localy') {
+            steps {
+                 echo "-----delete docker image localy-----"
+                    sh 'docker rmi timofii/angular-app:v${BUILD_NUMBER}'
+            }
+         }
     }
 }
