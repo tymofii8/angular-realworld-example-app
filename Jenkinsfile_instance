@@ -39,12 +39,11 @@ pipeline {
         stage('helm upgrade') {
             steps {
                 echo "-----update deployment-----"
-                    withKubeConfig(credentialsId: 'kubecfg', serverUrl: '') {
-                    
-                    sh '''
                         pwd
                         rm -rf k8s-helm
                         git clone https://github.com/tymofii8/k8s-helm.git
+                    withKubeConfig(credentialsId: 'kubecfg', serverUrl: '') {
+                    sh '''
                         cd k8s-helm
                         helm upgrade --install default --set container.frontendImage=timofii/angular-app:v${BUILD_NUMBER} ./
                     '''
